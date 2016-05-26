@@ -1383,7 +1383,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -1395,11 +1395,11 @@
          "objects":[
                 {
                  "height":32,
-                 "id":108,
+                 "id":115,
                  "name":"Player",
                  "properties":
                     {
-                     "Name":"Player"
+
                     },
                  "rotation":0,
                  "type":"",
@@ -1415,7 +1415,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":111,
+ "nextobjectid":117,
  "orientation":"orthogonal",
  "properties":
     {
@@ -1444,6 +1444,27 @@
              "38":
                 {
                  "Collides":"true"
+                }
+            },
+         "tilewidth":32
+        }, 
+        {
+         "columns":0,
+         "firstgid":42,
+         "margin":0,
+         "name":"Entities",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":32,
+         "tiles":
+            {
+             "0":
+                {
+                 "image":"Assets\/png\/Character-sprite.png"
                 }
             },
          "tilewidth":32

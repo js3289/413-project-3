@@ -64,7 +64,27 @@ function handleCollision() {
 	
 	hasCollision = tu.hitTestTile(character, floorData, 39, world, "every");
 	
+	if(hasCollision.hit) {
+		console.log("Collision!");
+	}
 	return hasCollision.hit;
+}
+
+function keepInBounds() {
+	var collision = false;
+	
+	if(character.x < 0) {
+		character.x = 0;
+	}
+	if(character.x > 960) {
+		character.x = 960;
+	}
+	if(character.y < 0) {
+		character.y = 0;
+	}
+	if(character.y > 960) {
+		character.y = 960;
+	}
 }
 
 function setup() {
@@ -75,6 +95,7 @@ function setup() {
 	var temp = world.getObject("Player");
 	
 	character = new Player("Player", "Assets/png/Character-sprite.png");
+	
 	var entity_layer = world.getObject("Entities");
 	
 	floorData = world.getObject("Floor").data;
@@ -98,7 +119,7 @@ function setup() {
 function animate() {
 	requestAnimationFrame(animate);
 	handleKeys();
-	handleCollision();
+	keepInBounds();
 	updateCamera();
 	renderer.render(stage);
 }
