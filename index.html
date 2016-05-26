@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title> Dungeon game </title>
+	</head>
+	<body>
+		<h1>Game3</h1>
+		<div id="gameport"></div>
+		
+		<h1> Instructions</h1>
+		<p> Movement: WASD or &#8593 &#8595 &#8592 &#8594  (Recommended WASD while Disqus code is present or low resolution monitor)</p>
+		<p> Collect all coins to win! Hit a stump, and you lose! </p>
+		<p> Press Enter after game to restart! </p>
+		
+		<h1>Comments</h1>
+		<div id="disqus_thread"></div>
+		<script>
+			(function() {
+				var d = document, s = d.createElement('script');
+				s.src = 'http://nau-cs413.disqus.com/embed.js';
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			} )(); 
+		</script>
+		
+		<script src="pixi.js"></script>
+		<script src="tileUtilities.js"></script>
+		<script src="game.js"></script>
+	</body>
+</html>
+		
+		
