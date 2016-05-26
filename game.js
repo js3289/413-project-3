@@ -26,7 +26,6 @@
 	var puzzleC;
 	var menuC;
 	var creditsC;
-	var allowMovement = true;
 
 // Constants for anchoring sprites
 	var LEFT = 0;
@@ -36,7 +35,7 @@
 	var RIGHT = 1;
 
 // Misc globals used in game
-	var character;
+	var player;
 	var emptyTile;
 	var keysActive;
 	var tiles;
@@ -46,10 +45,7 @@
 	var slide;
 	var isAnimating;
 	
-	var keysActive = [];
-	var floorData = [];
 	var world;
-	var tu;
 	
 	PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
 	
@@ -59,124 +55,28 @@
 		.add('Assets/png/Character-sprite.png')
 		.load(setup);
 
-function handleCollision() {
-	var hasCollision;
-	
-	hasCollision = tu.hitTestTile(character, floorData, 39, world, "every");
-	
-	return hasCollision.hit;
-}
-
 function setup() {
-	tu = new TileUtilities(PIXI);
+	var tu = new TileUtilities(PIXI);
 	world = tu.makeTiledWorld("map.json", "tileset.png");
 	stage.addChild(world);
 	
 	var temp = world.getObject("Player");
 	
-	character = new Player("Player", "Assets/png/Character-sprite.png");
+	player = new Player("Player", "Assets/png/Character-sprite.png");
 	var entity_layer = world.getObject("Entities");
 	
-	floorData = world.getObject("Floor").data;
-	console.log(floorData);
-	console.log(character);
-	document.addEventListener('keydown', function (e) {
-		keysActive[e.keyCode] = true;
-		e.preventDefault();
-		});
-	
-	document.addEventListener('keyup', function (e) {
-		keysActive[e.keyCode] = false;
-		e.preventDefault();
-		});
-	
-	entity_layer.addChild(character);
-	console.log(world.tileheight + " : " + world.tilewidth + " : " + world.widthInTiles);
+	entity_layer.addChild(player);
 	animate();
 }
 
 function animate() {
 	requestAnimationFrame(animate);
-	handleKeys();
-	handleCollision();
-	updateCamera();
 	renderer.render(stage);
 }
 
-function handleKeys() {
-	xMove = 0;
-	yMove = 0;
-	
-	if (allowMovement) {
-	
-		collision = handleCollision();
-		
-		if (collision) {
-			allowMovement = false;
-			if(character.direction === 0) {
-			createjs.Tween.get(character.position).to({y: character.position.y - 26}, 450);
-				//character.position.y -= 26;
-			}
-			else if (character.direction === 1) {
-				
-			createjs.Tween.get(character.position).to({y: character.position.y + 44}, 450);
-			}
-			else if (character.direction === 2) {
-				
-			createjs.Tween.get(character.position).to({x: character.position.x+44}, 450);
-			}
-			else if (character.direction === 3) {
-				
-			createjs.Tween.get(character.position).to({x: character.position.x-16}, 450);
-			}
-			setTimeout(function() { allowMovement = true }, 1000 );
-		}
-			
-		else {
-		
-			// W Key is 87 Up arrow is 38
-			if (keysActive[87] || keysActive[38]) {
-				character.direction = 1;
-				yMove -= character.movement;
-			}
-		
-			// S Key is 83 Down arrow is 40
-			else if (keysActive[83] || keysActive[40]) {
-				character.direction = 0;
-				yMove += character.movement;
-			}
-		
-			// A Key is 65 Left arrow is 37
-			if (keysActive[65] || keysActive[37]) {
-				character.direction = 2;
-				character.scale.x = -1;
-				xMove -= character.movement;
-			}
-		
-			// D Key is 68 Right arrow is 39
-			else if (keysActive[68] || keysActive[39]) {
-				character.direction = 3;
-				character.scale.x = 1;
-				xMove += character.movement;
-			}
-			
-			if(keysActive[13] && over) {
-				window.location.reload();
-			}
-			
-			if(xMove) {
-				character.position.x += xMove;
-			}
-			else {
-				character.position.y += yMove;
-			}
-		}
-	}
-}
-
-function updateCamera() {
-	stage.x = -character.x * SCALE + WIDTH / 2 - character.width / 2 * SCALE;
-	stage.y = -character.y * SCALE + HEIGHT / 2 - character.height / 2 * SCALE;
+function update_camera() {
+	stage.x = -player.x * SCALE + WIDTH / 2 - player.width / 2 * SCALE;
+	stage.y = -player.y * SCALE + HEIGHT / 2 - player.height / 2 * SCALE;
 	stage.x = -Math.max(0, Math.min(world.worldWidth * SCALE - WIDTH, -stage.x));
 	stage.y = -Math.max(0, Math.min(world.worldHeight * SCALE - HEIGHT, -stage.y));
 }
@@ -211,8 +111,6 @@ class Player extends EnhSprite{
 		this.movement = 2;
 		this.isClicked = false;
 		this.coins = 0;
-		this.width = 32;
-		this.height = 32;
 
 		this.temp = TextureImage(path);
 		this.sprite = new EnhSprite("player", true, this.temp);
