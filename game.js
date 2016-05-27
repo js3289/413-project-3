@@ -9,7 +9,6 @@
 	Sprite = PIXI.Sprite;
 	Container = PIXI.Container;
 	Renderer = PIXI.autoDetectRenderer;
-	Sound = PIXI.audioManager.getAudio;
 
 // Gameport, renderer, All containers + stage
 	var gameport = document.getElementById("gameport");
@@ -17,7 +16,7 @@
 	
 	gameport.appendChild(renderer.view);
 
-	var stage 		= new Container();
+	var stage 			= new Container();
 	var gameplayC		= new Container();
 	var titleC 			= new Container();
 	var instructionsC 	= new Container();
@@ -30,8 +29,8 @@
 	stage.scale.x = SCALE;
 	stage.scale.y = SCALE;
 
+// Creating entity layer + allowing movement, changes with collision
 	var allowMovement = true;
-
 	var entity_layer;
 	
 // Constants for anchoring sprites
@@ -68,6 +67,7 @@
 		.add('Assets/png/menuSheet.json')
 		.load(setup);
 
+// HandleCollision checks for collision with water. Used in handleKeys.
 function handleCollision() {
 	var hasCollision;
 	
@@ -79,6 +79,7 @@ function handleCollision() {
 	return hasCollision.hit;
 }
 
+// Keeps our character in the bounds of the map
 function keepInBounds() {
 	var collision = false;
 	
@@ -104,13 +105,15 @@ function keepInBounds() {
 	}
 }
 
+// Creates all of our containers and passes control of the game to the main menu, starts animating.
 function setup() {
-	
 	fillContainers();
 	controlState("main");
 	animate();
 }
 
+// createGame was originally in setup, however, it is now a separate function so that
+// we can only create the game after the user presses play to avoid playing while in the wrong menu.
 function createGame() {
 
 	world = tu.makeTiledWorld("map.json", "tileset.png");
@@ -139,12 +142,14 @@ function createGame() {
 	controlState("play")
 }
 
+// Checks if the character collides with grass
 function hasWon() {
 	var won = false;
 	won = tu.hitTestTile(character.boundingSprite, floorData, 5, world, "some").hit;
 	return won
 }
 
+// Used in setup to fill our multiple containers. Most of the menu is reused from project 2.
 function fillContainers() {
 	
 // Main menu
@@ -224,6 +229,8 @@ function fillContainers() {
 	winC.addChild(new Sprite(TextureFrame("you-win.png")));
 }
 
+// Used to control the containers on the stage based on the state of the game.
+// Makes moving from window to window extremely easy without messing with visibility.
 function controlState(state) {
 	for(var i = stage.children.length - 1; i >= 0; i--){
 		stage.removeChild(stage.children[i]);
@@ -257,6 +264,7 @@ function controlState(state) {
 	
 }
 
+// Animate function only handles keys, updates camera, etc, when we are playing (more efficient)
 function animate() {
 	requestAnimationFrame(animate);
 	if(gameState === "play"){
@@ -267,6 +275,8 @@ function animate() {
 	renderer.render(stage);
 }
 
+// Handle keys handles movement of the player. I reused my movement logic from project 1, but took out
+// Diagonal movement as it was not as appropriate for a tile based game.
 function handleKeys() {
 	xMove = 0;
 	yMove = 0;
@@ -331,10 +341,6 @@ function handleKeys() {
 				xMove += character.movement;
 			}
 			
-			if(keysActive[13] && over) {
-				window.location.reload();
-			}
-			
 			if(xMove) {
 				character.position.x += xMove;
 				character.boundingSprite.position.x += xMove;
@@ -347,6 +353,7 @@ function handleKeys() {
 	}
 }
 
+// Moves the gameplay container position to follow the player, code provided to us.
 function updateCamera() {
 	gameplayC.x = -character.x * SCALE + WIDTH / 2 - character.width / 2 * SCALE;
 	gameplayC.y = -character.y * SCALE + HEIGHT / 2 - character.height / 2 * SCALE;
