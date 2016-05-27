@@ -1,0 +1,93 @@
+{"frames": {
+
+"Instructions-button.png":
+{
+	"frame": {"x":0,"y":0,"w":192,"h":108},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":108},
+	"sourceSize": {"w":192,"h":108},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Play-button.png":
+{
+	"frame": {"x":192,"y":0,"w":192,"h":108},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":108},
+	"sourceSize": {"w":192,"h":108},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Credits-button.png":
+{
+	"frame": {"x":384,"y":0,"w":192,"h":108},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":108},
+	"sourceSize": {"w":192,"h":108},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Back-button.png":
+{
+	"frame": {"x":576,"y":0,"w":192,"h":108},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":108},
+	"sourceSize": {"w":192,"h":108},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"you-lose.png":
+{
+	"frame": {"x":768,"y":0,"w":400,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":400},
+	"sourceSize": {"w":400,"h":400},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"you-win.png":
+{
+	"frame": {"x":1168,"y":0,"w":400,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":400},
+	"sourceSize": {"w":400,"h":400},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"menu.png":
+{
+	"frame": {"x":0,"y":400,"w":500,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":500,"h":500},
+	"sourceSize": {"w":500,"h":500},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Credits.png":
+{
+	"frame": {"x":500,"y":400,"w":500,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":500,"h":500},
+	"sourceSize": {"w":500,"h":500},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Instructions.png":
+{
+	"frame": {"x":1000,"y":400,"w":500,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":500,"h":500},
+	"sourceSize": {"w":500,"h":500},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "menuSheet.png",
+	"format": "RGBA8888",
+	"size": {"w":1568,"h":900},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:b3f1a5d8204c157e71f2c21affd7ad0d:695c0fff78b5e1a2e339396e8e81dc07:9ee70c25a364bfcca3f261cfb3faa32a$"
+}
+}
